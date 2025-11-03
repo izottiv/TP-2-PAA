@@ -23,7 +23,7 @@ void lerMapa(FILE *arquivo, Celula **mapa, int h, int w) {
     for (int i = 0; i < h; i++) {
         for (int j = 0; j < w; j++) {
             if (fscanf(arquivo, "%3s", buffer) != 1) {
-                fprintf(stderr, "Erro ao ler célula (%d, %d).\n", i, j);
+                fprintf(stderr, "Erro ao ler celula (%d, %d).\n", i, j);
                 exit(EXIT_FAILURE);
             }
 
@@ -49,14 +49,20 @@ void imprimirMapa(Celula **mapa, int h, int w) {
     for (int i = 0; i < h; i++) {
         for (int j = 0; j < w; j++) {
             switch (mapa[i][j].tipo) {
-                case INTRANSITAVEL: printf("*** "); break;
-                case DESCANSO:      printf("000 "); break;
-                case ANCORA:        printf("AAA "); break;
-                case INIMIGO:       printf("%03d ", mapa[i][j].valor); break;
-            }
+                case INTRANSITAVEL: 
+                    printf("*** "); 
+                break;
+                case DESCANSO:
+                    printf("000 ");
+                break;
+                case ANCORA: 
+                    printf("AAA "); 
+                break;
+                case INIMIGO: 
+                    printf("%03d ", mapa[i][j].valor); 
+                break;
+            }            
         }
         printf("\n");
     }
 }
-
-

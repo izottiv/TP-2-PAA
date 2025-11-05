@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "mapa.h"
+#include "menorCaminho.h"
 
 #define TAM_NOME_ARQUIVO 50
 
@@ -20,8 +20,10 @@ int main() {
     int h, w, F, D, N;
     fscanf(arquivo, "%d %d %d %d %d", &h, &w, &F, &D, &N);
 
-    Celula **mapaPresente = alocarMapa(h, w);
-    Celula **mapaPassado  = alocarMapa(h, w);
+    linhas = h; colunas = w;
+    char mapaPresente[linhas][colunas][4];
+    char mapaPassado[linhas][colunas][4];
+
 
     lerMapa(arquivo, mapaPresente, h, w);
 
@@ -31,8 +33,36 @@ int main() {
     lerMapa(arquivo, mapaPassado, h, w);
     fclose(arquivo);
 
+    char mapasCombinados[linhas*2+1][colunas][4];
+    juntarMapas(h,w,mapaPresente,mapaPassado,mapasCombinados);
+
+    int slotsDisponiveis;
+    slotsDisponiveis = calculaSlotsDisponiveis(mapasCombinados, h*2+1, w);
+
+
+    Celula** mapaComoGrafo;
+    mapaComoGrafo = alocarMapa(slotsDisponiveis, slotsDisponiveis);
+
+    posicao posicoes[slotsDisponiveis];
+    identificaVertices(mapasCombinados, posicoes, slotsDisponiveis);
+
+
+    iniciaGrafo(mapaComoGrafo, slotsDisponiveis);
+    conectaMapa(mapasCombinados, mapaComoGrafo, h*2+1, w, slotsDisponiveis, posicoes, D);
+    
+
+    int** guardarCaminho;
+    guardarCaminho = alocarMapaInt(slotsDisponiveis);
+
+    floyds(mapaComoGrafo, guardarCaminho, slotsDisponiveis); 
+    // imprimeGrafo(mapaComoGrafo, slotsDisponiveis);
+
+    imprimeCaminho(0, slotsDisponiveis-1, guardarCaminho, posicoes, h);
+
+    liberarGrafo(mapaComoGrafo, slotsDisponiveis);
+
     // Teste de leitura
-/*    printf("Altura: %d, Largura: %d\n", h, w);
+    /*printf("Altura: %d, Largura: %d\n", h, w);
     printf("Força inicial: %d, Descanso: %d, Força de Nikador: %d\n", F, D, N);
 
     printf("\n=== Mapa do Presente ===\n");

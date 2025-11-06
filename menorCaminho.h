@@ -6,4 +6,4 @@ int** alocarMapaInt(int tam);
 
 void floyds(Celula** total, int** next, int tam);
 
-void imprimeCaminho(int u, int v, int** next, posicao* posicoes, int h);
+void imprimeCaminho(int u, int v, int** next, Celula** total, posicao* posicoes, int h, int F, int N);

@@ -44,21 +44,44 @@ void floyds(Celula** total, int** next, int tam) {
 }
 
 
-void imprimeCaminho(int u, int v, int** next, posicao* posicoes, int h) {
-    if (next[u][v] == -1) {
-        printf("Sem caminho de %d até %d\n", u, v);
+void imprimeCaminho(int u, int v, int** next, Celula** total, posicao* posicoes, int h, int F, int N) {
+    if (next[u][v] == -1 ) {
+        printf("A calamidade de Nikador e inevitavel");
         return;
     }
+    posicao caminho[100];
+    int inicio = 0;
+    int i=0;
     while (u != v) {
         if(next[u][v] == v){
             break;
         }
         u = next[u][v];
         if(posicoes[u].coluna < h){
-            printf("%d %d\n", posicoes[u].coluna, posicoes[u].linha);
+            caminho[i].linha = posicoes[u].linha; 
+            caminho[i].coluna = posicoes[u].coluna;
+            i++;
         } else if(posicoes[u].eAncora == 0) {
-            printf("%d %d\n", posicoes[u].coluna - h - 1, posicoes[u].linha);
+            caminho[i].linha = posicoes[u].linha; 
+            caminho[i].coluna = posicoes[u].coluna -h -1;
+            i++;
         } 
+    } 
+    int custo = total[inicio][v].valor;
+    F -= custo;
+    if (F <= 0) {
+        printf("A calamidade de Nikador e inevitavel\n");
+        return;
     }
-    printf("\n");
+
+    for (int j = 0; j < i; j++) {
+        printf("%d %d\n", caminho[j].coluna, caminho[j].linha);
+    }
+
+    if(F>=N){
+        printf("A ruina de Nikador e iminente\n");
+    }
+    else{
+        printf("Sera necessario mais planejamento para parar a calamidade\n");
+    }
 }

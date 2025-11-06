@@ -20,33 +20,33 @@ void gerarMapa(){
         printf("1 - Dificuldades\n2 - Configuracao Total\nEscolha: ");
         scanf("%d", &escolha);
         if(escolha == 1){
-            printf("Escolha a dificuldade:\n1 - Facil (Durabilidade alta / Mapa pequeno)\n2 - Medio (Durabilidade media / Mapa medio)\n3 - Dificil (Durabilidade baixa / Mapa grande)\nEscolha: ");
+            printf("Escolha a dificuldade:\n1 - Facil (Forca alta / Mapa pequeno)\n2 - Medio (Forca media / Mapa medio)\n3 - Dificil (Forca baixa / Mapa grande)\nEscolha: ");
             scanf("%d", &escolha2);
-            switch (escolha2)
-            {
-            // case 1:
-            //     altura = rand() % 3 + 6;
-            //     largura =rand() % 3 + 6;
-            //     // pecas = rand() % 2 + 2;
-            //     // durabilidade = rand() % 11 + 50;
-            //     break;
-            // case 2:
-            //     altura = rand() % 3 + 10;
-            //     largura =rand() % 3 + 10;
-            //     // pecas = rand() % 2 + 4;
-            //     // durabilidade = rand() % 11 + 35;
-            //     break;
-            // case 3:
-            //     altura = rand() % 3 + 14;
-            //     largura =rand() % 3 + 14;
-            //     // pecas = rand() % 2 + 7;
-            //     // durabilidade = rand() % 11 + 25;
-            //     break;
-            default:
-                break;
+            switch(escolha2){
+                case 1: 
+                    altura = rand() % 3 + 4;   
+                    largura = rand() % 3 + 4;
+                    forcaIncial = 100;
+                    recuperacao = 6;
+                    forcaNikador = 35;
+                    break;
+
+                case 2:
+                    altura = rand() % 3 + 6;  
+                    largura = rand() % 3 + 6;
+                    forcaIncial = 90;
+                    recuperacao = 3;
+                    forcaNikador = 45;
+                    break;
+
+                case 3:
+                    altura = rand() % 6 + 5;   
+                    largura = rand() % 6 + 5;
+                    forcaIncial = 80;
+                    recuperacao = 2;
+                    forcaNikador = rand() % 11 + 50; 
+                    break;
             }
-            // custo = 5;
-            // aumento = 10;
         }
         else{
         printf("Qual deve ser a altura e largura do mapa (separados por espaco)?\n");
@@ -56,7 +56,7 @@ void gerarMapa(){
         printf("Qual e o valor recuperado a cada descanso?\n");
         scanf("%d", &recuperacao);
         printf("Qual a forca de Nikador?\n");
-        scanf("%d", &forcaNikador);
+        scanf("%d", &forcaNikador);}
         fprintf(file, "%d %d %d %d %d\n", altura, largura, forcaIncial, recuperacao, forcaNikador);
         char* mapa[altura][largura];
         char* mapa2[altura][largura]; 
@@ -185,7 +185,9 @@ void gerarMapa(){
             }
         }
 
-    }}}
+    }
+    fclose(file);
+}
 
 int gerarNumeroAleatorio(int limite){
     return rand() % limite;

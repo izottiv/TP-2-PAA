@@ -72,8 +72,11 @@ int main() {
 
         floyds(mapaComoGrafo, guardarCaminho, slotsDisponiveis); 
         // imprimeGrafo(mapaComoGrafo, slotsDisponiveis);
-
-        imprimeCaminho(h, w, mapaPresente, mapaPassado, 0, slotsDisponiveis-1, guardarCaminho, mapaComoGrafo, posicoes, F, N);
+        int escolha;
+        printf("Deseja visualizar o resultado de que maneira:\n1 - Apenas o caminho realizado (caso exista)\n2 - Mapa mostrando as movimentacoes (caso exista)\nEscolha: ");
+        scanf("%d", &escolha);
+        printf("\n");
+        imprimeCaminho(escolha, h, w, mapaPresente, mapaPassado, 0, slotsDisponiveis-1, guardarCaminho, mapaComoGrafo, posicoes, F, N);
 
         liberarGrafo(mapaComoGrafo, slotsDisponiveis);
     }

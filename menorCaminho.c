@@ -102,7 +102,7 @@ void imprimirMapaInteiroColoridoPP(int h, int w, char mapa[h][w][4], posicao cam
     printf("\n");
 }
 
-void imprimeCaminho(int h, int w, char mapaPresente[h][w][4], char mapaPassado[h][w][4], int u, int v, int** next, Celula** total, posicao* posicoes, int F, int N) {
+void imprimeCaminho(int escolha, int h, int w, char mapaPresente[h][w][4], char mapaPassado[h][w][4], int u, int v, int** next, Celula** total, posicao* posicoes, int F, int N) {
     if (next[u][v] == -1 ) {
         printf("A calamidade de Nikador e inevitavel");
         return;
@@ -133,6 +133,7 @@ void imprimeCaminho(int h, int w, char mapaPresente[h][w][4], char mapaPassado[h
         printf("A calamidade de Nikador e inevitavel\n");
         return;
     }
+    if(escolha == 2){
     for (int j = 0; j < i; j++) {
         printf("%d %d\n", caminho[j].coluna, caminho[j].linha);
         if(caminho[j].mapa == PRESENTE){
@@ -178,4 +179,17 @@ void imprimeCaminho(int h, int w, char mapaPresente[h][w][4], char mapaPassado[h
         #else
         usleep(500*1000);  
       #endif
+    }
+    else{
+        for (int j = 0; j < i; j++) {
+        printf("%d %d\n", caminho[j].coluna, caminho[j].linha);
+    }
+    printf("\n");
+    if(F>=N){
+        printf("A ruina de Nikador e iminente\n\n");
+    }
+    else{
+        printf("Sera necessario mais planejamento para parar a calamidade\n\n");
+    }
+}
 }

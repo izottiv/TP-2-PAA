@@ -73,7 +73,7 @@ int main() {
         floyds(mapaComoGrafo, guardarCaminho, slotsDisponiveis); 
         // imprimeGrafo(mapaComoGrafo, slotsDisponiveis);
 
-        imprimeCaminho(0, slotsDisponiveis-1, guardarCaminho, mapaComoGrafo, posicoes, h, F, N);
+        imprimeCaminho(h, w, mapaPresente, mapaPassado, 0, slotsDisponiveis-1, guardarCaminho, mapaComoGrafo, posicoes, F, N);
 
         liberarGrafo(mapaComoGrafo, slotsDisponiveis);
     }

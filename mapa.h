@@ -15,6 +15,11 @@ typedef enum {
     ANCORA
 } TipoCelula;
 
+typedef enum {
+    PRESENTE,
+    PASSADO
+} Tempo;
+
 //Estrutura que representa uma célula do mapa
 typedef struct {
     TipoCelula tipo;
@@ -25,6 +30,7 @@ typedef struct {
     int linha; 
     int coluna;
     int eAncora;
+    Tempo mapa;
 } posicao;
 
 

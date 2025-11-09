@@ -83,7 +83,7 @@ int main() {
     }
 
     if(escolha == 2){
-        
+        gerarMapa();
     }
 
     if (escolha == 3) {

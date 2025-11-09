@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "menorCaminho.h"
+#include "gerarMapa.h"
 
 #define TAM_NOME_ARQUIVO 50
 

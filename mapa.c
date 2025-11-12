@@ -89,21 +89,22 @@ void identificaVertices(char mapaChar[linhas*2+1][colunas][4], posicao* posicoes
     for(int i = 0; i <colunas; i++){
         for(int j = 0; j<linhas*2+1; j++){
             if(strcmp(mapaChar[j][i], "***") == 1 && strcmp(mapaChar[j][i], "///") == 1){
-                posicoes[preechidos].linha = i;
-                posicoes[preechidos].coluna = j;
-
-            if(strcmp(mapaChar[j][i], "AAA") == 0){
-                posicoes[preechidos].eAncora = 1;
-                posicoes[preechidos].eTunel = 0;
-            }else if ((mapaChar[j][i], "TTT") == 0){
-                posicoes[preechidos].eAncora = 0;
-                posicoes[preechidos].eTunel = 1;
+                    posicoes[preechidos].linha = i;
+                    posicoes[preechidos].coluna = j;
+                
+                if(strcmp(mapaChar[j][i], "AAA") == 0){
+                    posicoes[preechidos].eAncora = 1;
+                    posicoes[preechidos].eTunel = 0;
+                }else if (strcmp(mapaChar[j][i], "TTT") == 0){
+                    posicoes[preechidos].eAncora = 0;
+                    posicoes[preechidos].eTunel = 1;
+                }
+                else {
+                    posicoes[preechidos].eAncora = 0;
+                    posicoes[preechidos].eTunel = 0;
+                }
+                preechidos++;
             }
-            } else {
-                posicoes[preechidos].eAncora = 0;
-                posicoes[preechidos].eTunel = 0;
-            }
-            preechidos++;
         }
     }
 }
@@ -138,13 +139,6 @@ void conectaMapa(char mapaChar[linhas*2+1][colunas][4], Celula** mapaGrafo, int 
             /*Se existir nos disponíves um vértice cuja coluna seja igual à (coluna do vertice de origem)+1 ao mesmo tempo que sua linha seja igual à (linha do vertice de origem) + 1 (quando fica em baixo)*/
             /*Ele define o tipo de celula, se for descanso ele ele coloca como negativo o valor que recuperamos, pra indicar uma escolher que diminiu o caminho no grafo
             Se não for descanso, vai colocar o valor que está no char usando atoi (005 -> 5)*/
-
-            // printf("a linha e o valor de h/2 %d %d\n", posicoes[j].coluna, h/2);
-            // printf("comparacoes em pares:\n");
-            // printf(" %d -> %d && %d -> %d\n",posicoes[i].linha+1, posicoes[j].linha, posicoes[i].coluna, posicoes[j].coluna);
-            // printf(" %d -> %d && %d -> %d\n",posicoes[i].linha+1, posicoes[j].linha, posicoes[i].coluna-1, posicoes[j].coluna);
-            // printf(" %d -> %d && %d -> %d\n",posicoes[i].linha+1, posicoes[j].linha, posicoes[i].coluna+1, posicoes[j].coluna);
-
             if((i == 0 && posicoes[j].linha == 0 && posicoes[j].coluna < h/2) ||
             (posicoes[i].linha+1 == posicoes[j].linha && posicoes[i].coluna == posicoes[j].coluna) ||
             (posicoes[i].linha+1 == posicoes[j].linha && posicoes[i].coluna-1 == posicoes[j].coluna) ||
@@ -168,6 +162,14 @@ void conectaMapa(char mapaChar[linhas*2+1][colunas][4], Celula** mapaGrafo, int 
                 mapaGrafo[j][i].valor = 0;
             }
 
+            if (posicoes[i].eTunel){
+                if (i % 2 == 0){
+                    mapaGrafo[i][0].valor = 0;
+                }else{
+                    mapaGrafo[i][slotsDisponiveis - 1].valor = 0;
+                }
+            }
+
             /*Se eles estão na coluna da esquerda da matriz de mapa, eles vão ser conectados ao vértice final (o boss)*/
             if(posicoes[i].linha == w - 1){
                 mapaGrafo[i][slotsDisponiveis - 1].valor = 0; 
@@ -181,7 +183,7 @@ void conectaMapa(char mapaChar[linhas*2+1][colunas][4], Celula** mapaGrafo, int 
 void imprimeGrafo(Celula** mapaGrafo, int slotsDinponiveis){
     for(int i = 0; i < slotsDinponiveis; i++){
         for(int j = 0; j <slotsDinponiveis; j++){
-        printf("%d ", mapaGrafo[i][j].valor);
+          printf("%d ", mapaGrafo[i][j].valor);
         } printf("\n");
     }
 }

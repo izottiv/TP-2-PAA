@@ -53,40 +53,29 @@ int main() {
         char mapasCombinados[linhas*2+1][colunas][4];
         juntarMapas(h,w,mapaPresente,mapaPassado,mapasCombinados);
         
-        printf("1\n");
-        
         int slotsDisponiveis;
         slotsDisponiveis = calculaSlotsDisponiveis(mapasCombinados, h*2+1, w);
 
-        printf("2\n");
-
         Celula** mapaComoGrafo;
         mapaComoGrafo = alocarMapa(slotsDisponiveis, slotsDisponiveis);
-        printf("3\n");
 
         posicao posicoes[slotsDisponiveis];
         identificaVertices(mapasCombinados, posicoes, slotsDisponiveis);
 
-        printf("4\n");
 
         iniciaGrafo(mapaComoGrafo, slotsDisponiveis);
-
-        printf("5\n");
-
         conectaMapa(mapasCombinados, mapaComoGrafo, h*2+1, w, slotsDisponiveis, posicoes, D);
-        
-        printf("6\n");
-
+   
         int** guardarCaminho;
         guardarCaminho = alocarMapaInt(slotsDisponiveis);
-        printf("7\n");
     
         floyds(mapaComoGrafo, guardarCaminho, slotsDisponiveis); 
+        
         //imprimeGrafo(mapaComoGrafo, slotsDisponiveis);
-        // int escolha;
-        // printf("Deseja visualizar o resultado de que maneira:\n1 - Apenas o caminho realizado (caso exista)\n2 - Mapa mostrando as movimentacoes (caso exista)\nEscolha: ");
-        // scanf("%d", &escolha);
-        // printf("\n");
+        int escolha;
+        printf("Deseja visualizar o resultado de que maneira:\n1 - Apenas o caminho realizado (caso exista)\n2 - Mapa mostrando as movimentacoes (caso exista)\nEscolha: ");
+        scanf("%d", &escolha);
+        printf("\n");
         
         imprimeCaminho(escolha, h, w, mapaPresente, mapaPassado, 0, slotsDisponiveis-1, guardarCaminho, mapaComoGrafo, posicoes, F, N);
 

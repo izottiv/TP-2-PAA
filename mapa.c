@@ -138,10 +138,18 @@ void conectaMapa(char mapaChar[linhas*2+1][colunas][4], Celula** mapaGrafo, int 
             /*Se existir nos disponíves um vértice cuja coluna seja igual à (coluna do vertice de origem)+1 ao mesmo tempo que sua linha seja igual à (linha do vertice de origem) + 1 (quando fica em baixo)*/
             /*Ele define o tipo de celula, se for descanso ele ele coloca como negativo o valor que recuperamos, pra indicar uma escolher que diminiu o caminho no grafo
             Se não for descanso, vai colocar o valor que está no char usando atoi (005 -> 5)*/
+
+            // printf("a linha e o valor de h/2 %d %d\n", posicoes[j].coluna, h/2);
+            // printf("comparacoes em pares:\n");
+            // printf(" %d -> %d && %d -> %d\n",posicoes[i].linha+1, posicoes[j].linha, posicoes[i].coluna, posicoes[j].coluna);
+            // printf(" %d -> %d && %d -> %d\n",posicoes[i].linha+1, posicoes[j].linha, posicoes[i].coluna-1, posicoes[j].coluna);
+            // printf(" %d -> %d && %d -> %d\n",posicoes[i].linha+1, posicoes[j].linha, posicoes[i].coluna+1, posicoes[j].coluna);
+
             if((i == 0 && posicoes[j].linha == 0 && posicoes[j].coluna < h/2) ||
             (posicoes[i].linha+1 == posicoes[j].linha && posicoes[i].coluna == posicoes[j].coluna) ||
             (posicoes[i].linha+1 == posicoes[j].linha && posicoes[i].coluna-1 == posicoes[j].coluna) ||
             (posicoes[i].linha+1 == posicoes[j].linha && posicoes[i].coluna+1 == posicoes[j].coluna)){
+                
                 mapaGrafo[i][j].tipo = defineTipoCelula(mapaChar[posicoes[j].coluna][posicoes[j].linha]);
                 if(mapaGrafo[i][j].tipo == DESCANSO){
                     mapaGrafo[i][j].valor = -1 * D;
@@ -150,6 +158,7 @@ void conectaMapa(char mapaChar[linhas*2+1][colunas][4], Celula** mapaGrafo, int 
                 }
                 
             }
+
 
             /*Depois, ao verificar todas as conexões normais, procura pelas conexões de âncoras
             Caso eles tenham correspondentes na mesma coluna e em uma coluna (h/2)-1 acima, e forem do tipo âncora, então vão ter uma conexão*/

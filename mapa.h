@@ -12,7 +12,8 @@ int linhas, colunas;
 typedef enum {
     DESCANSO,
     INIMIGO,
-    ANCORA
+    ANCORA,
+    TUNEL
 } TipoCelula;
 
 typedef enum {
@@ -30,6 +31,7 @@ typedef struct {
     int linha; 
     int coluna;
     int eAncora;
+    int eTunel;
     Tempo mapa;
 } posicao;
 

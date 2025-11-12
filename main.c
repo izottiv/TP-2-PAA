@@ -52,10 +52,9 @@ int main() {
 
         char mapasCombinados[linhas*2+1][colunas][4];
         juntarMapas(h,w,mapaPresente,mapaPassado,mapasCombinados);
-
+        
         int slotsDisponiveis;
         slotsDisponiveis = calculaSlotsDisponiveis(mapasCombinados, h*2+1, w);
-
 
         Celula** mapaComoGrafo;
         mapaComoGrafo = alocarMapa(slotsDisponiveis, slotsDisponiveis);
@@ -66,17 +65,18 @@ int main() {
 
         iniciaGrafo(mapaComoGrafo, slotsDisponiveis);
         conectaMapa(mapasCombinados, mapaComoGrafo, h*2+1, w, slotsDisponiveis, posicoes, D);
-        
-
+   
         int** guardarCaminho;
         guardarCaminho = alocarMapaInt(slotsDisponiveis);
-
+    
         floyds(mapaComoGrafo, guardarCaminho, slotsDisponiveis); 
-        // imprimeGrafo(mapaComoGrafo, slotsDisponiveis);
+        
+        //imprimeGrafo(mapaComoGrafo, slotsDisponiveis);
         int escolha;
         printf("Deseja visualizar o resultado de que maneira:\n1 - Apenas o caminho realizado (caso exista)\n2 - Mapa mostrando as movimentacoes (caso exista)\nEscolha: ");
         scanf("%d", &escolha);
         printf("\n");
+        
         imprimeCaminho(escolha, h, w, mapaPresente, mapaPassado, 0, slotsDisponiveis-1, guardarCaminho, mapaComoGrafo, posicoes, F, N);
 
         liberarGrafo(mapaComoGrafo, slotsDisponiveis);

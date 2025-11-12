@@ -48,12 +48,16 @@ void floyds(Celula** total, int** next, int tam) {
     }
 }
 
-
 void imprimirPontoColorido(int h, int w, char mapa[h][w][4], int linhaAtual, int colunaAtual) {
     for (int i = 0; i < h; i++) {
         for (int j = 0; j < w; j++) {
             if (i == linhaAtual && j == colunaAtual) {
-                printf("\033[1;32m%s\033[0m ", mapa[i][j]);
+                if (strcmp(mapa[i][j],"TTT") == 0){
+                    printf("\033[1;35m%s\033[0m ", mapa[i][j]);
+                }
+                else{
+                    printf("\033[1;32m%s\033[0m ", mapa[i][j]);
+                }
             } else {
                 printf("%s ", mapa[i][j]);
             }
@@ -70,7 +74,12 @@ void imprimirMapaInteiroColoridoP(int h, int w, char mapa[h][w][4], posicao cami
             int k;
             for (k = 0; k < tamanho; k++) {
                 if (caminho[k].mapa == PRESENTE && i == caminho[k].coluna && j == caminho[k].linha) {
-                    printf("\033[1;32m%s\033[0m ", mapa[i][j]);
+                    if (strcmp(mapa[i][j],"TTT") == 0){
+                    printf("\033[1;35m%s\033[0m ", mapa[i][j]);
+                    }
+                    else{
+                        printf("\033[1;32m%s\033[0m ", mapa[i][j]);
+                    }
                     break;
                 }
             }
@@ -89,7 +98,12 @@ void imprimirMapaInteiroColoridoPP(int h, int w, char mapa[h][w][4], posicao cam
             int k;
             for (k = 0; k < tamanho; k++) {
                 if (caminho[k].mapa == PASSADO && i == caminho[k].coluna && j == caminho[k].linha) {
-                    printf("\033[1;32m%s\033[0m ", mapa[i][j]);
+                    if (strcmp(mapa[i][j],"TTT") == 0){
+                    printf("\033[1;35m%s\033[0m ", mapa[i][j]);
+                    }
+                    else{
+                        printf("\033[1;32m%s\033[0m ", mapa[i][j]);
+                    }
                     break;
                 }
             }
@@ -119,11 +133,13 @@ void imprimeCaminho(int escolha, int h, int w, char mapaPresente[h][w][4], char 
             caminho[i].linha = posicoes[u].linha; 
             caminho[i].coluna = posicoes[u].coluna;
             caminho[i].mapa = PRESENTE;
+            caminho[i].eTunel = posicoes[u].eTunel;
             i++;
         } else if(posicoes[u].eAncora == 0) {
             caminho[i].linha = posicoes[u].linha; 
             caminho[i].coluna = posicoes[u].coluna -h -1;
             caminho[i].mapa = PASSADO;
+            caminho[i].eTunel = posicoes[u].eTunel;
             i++;
         } 
     } 
@@ -183,6 +199,10 @@ void imprimeCaminho(int escolha, int h, int w, char mapaPresente[h][w][4], char 
     else{
         for (int j = 0; j < i; j++) {
         printf("%d %d\n", caminho[j].coluna, caminho[j].linha);
+        if (caminho[j].eTunel){
+            printf("Encontramos Nikador na saida do tunel\n");
+        }
+        
     }
     printf("\n");
     if(F>=N){

@@ -4,7 +4,7 @@
 
 int** alocarMapaInt(int tam);
 
-void floyds(Celula** total, int** next, int tam);
+double floyds(Celula** total, int** next, int tam);
 
 void imprimirMapaInteiroColoridoP(int h, int w, char mapa[h][w][4], posicao caminho[], int tamanho);
 

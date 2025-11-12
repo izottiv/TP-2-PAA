@@ -1,4 +1,5 @@
 #include "menorCaminho.h"
+#include <time.h>
 #if _WIN32 || _WIN64
     #include <Windows.h>
 #else
@@ -13,9 +14,10 @@ int** alocarMapaInt(int tam){
     return mapa;
 }
 
-void floyds(Celula** total, int** next, int tam) {
+double floyds(Celula** total, int** next, int tam) {
     int i, j, k;
-
+    clock_t t1, t2;
+    t1 = clock();
     // Inicializa a matriz next, que serve para guardar o caminho que encontrarmos
     for (i = 0; i < tam; i++) {
         for (j = 0; j < tam; j++) {
@@ -46,6 +48,9 @@ void floyds(Celula** total, int** next, int tam) {
             }
         }
     }
+    t2 = clock();
+    double diff = (float)(t2 - t1) / CLOCKS_PER_SEC;
+    return diff; 
 }
 
 void imprimirPontoColorido(int h, int w, char mapa[h][w][4], int linhaAtual, int colunaAtual) {

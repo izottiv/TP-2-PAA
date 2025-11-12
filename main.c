@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include<time.h>
 #include "identificacaoMenorCaminho/menorCaminho.h"
 #include "geracaoMapa/gerarMapa.h"
 
@@ -17,6 +18,7 @@ int main() {
     printf("Escolha: ");
     scanf("%d", &escolha);
     getchar();
+    
 
     if(escolha == 1){
         FILE *arquivo = NULL;
@@ -70,9 +72,7 @@ int main() {
    
         int** guardarCaminho;
         guardarCaminho = alocarMapaInt(slotsDisponiveis);
-    
-        floyds(mapaComoGrafo, guardarCaminho, slotsDisponiveis); 
-        
+        double tempo = floyds(mapaComoGrafo, guardarCaminho, slotsDisponiveis); 
         //imprimeGrafo(mapaComoGrafo, slotsDisponiveis);
         int escolha;
         printf("Deseja visualizar o resultado de que maneira:\n1 - Apenas o caminho realizado (caso exista)\n2 - Mapa mostrando as movimentacoes (caso exista)\nEscolha: ");
@@ -80,7 +80,10 @@ int main() {
         printf("\n");
         
         imprimeCaminho(escolha, h, w, mapaPresente, mapaPassado, 0, slotsDisponiveis-1, guardarCaminho, mapaComoGrafo, posicoes, F, N);
-
+        printf("Deseja imprimir o tempo de execucao do algoritmo\n1 - Sim\n2 - Nao\nEscolha:");
+        int escolha2;
+        scanf("%d", &escolha2);
+        printf("Slots disponiveis: %d Tempo: %lf segundos\n",slotsDisponiveis, tempo);
         liberarGrafo(mapaComoGrafo, slotsDisponiveis);
     }
 

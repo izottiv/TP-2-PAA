@@ -91,22 +91,31 @@ void identificaVertices(char mapaChar[linhas*2+1][colunas][4], posicao* posicoes
             if(strcmp(mapaChar[j][i], "***") == 1 && strcmp(mapaChar[j][i], "///") == 1){
                 posicoes[preechidos].linha = i;
                 posicoes[preechidos].coluna = j;
-                if(strcmp(mapaChar[j][i], "AAA") == 0){
-                    posicoes[preechidos].eAncora = 1;
-                } else {
-                    posicoes[preechidos].eAncora = 0;
-                }
-                preechidos++;
+
+            if(strcmp(mapaChar[j][i], "AAA") == 0){
+                posicoes[preechidos].eAncora = 1;
+                posicoes[preechidos].eTunel = 0;
+            }else if ((mapaChar[j][i], "TTT") == 0){
+                posicoes[preechidos].eAncora = 0;
+                posicoes[preechidos].eTunel = 1;
             }
+            } else {
+                posicoes[preechidos].eAncora = 0;
+                posicoes[preechidos].eTunel = 0;
+            }
+            preechidos++;
         }
     }
 }
+
 
 TipoCelula defineTipoCelula(char tipo[4]){
     if(strcmp(tipo, "AAA") == 0){
         return ANCORA;
     } else if(strcmp(tipo, "000") == 0){
         return DESCANSO;
+    } else if(strcmp(tipo, "TTT") == 0){
+        return TUNEL; 
     } else {
         return INIMIGO;
     }
@@ -120,7 +129,6 @@ void conectaMapa(char mapaChar[linhas*2+1][colunas][4], Celula** mapaGrafo, int 
     /*O código procura se existe conexão de todos os vértices para todos os vértices, sendo i o vertice de origem e j o de destino*/
     for(int i = 0; i < slotsDisponiveis - 1; i++){ 
         for(int j = 0; j <slotsDisponiveis; j++){
-            
             /*Caso i seja o primeiro vértice e estejamos percorrendo a primeira coluna do mapa do presente*/
             /*Ou*/
             /*Se existir nos disponíves um vértice cuja COLUNA que seja igual à (coluna do vertice de origem)+1 ao mesmo tempo que sua linha seja igual à linha do vertice de origem (quando fica na frente/a direita)*/

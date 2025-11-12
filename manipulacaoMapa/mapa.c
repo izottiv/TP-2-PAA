@@ -83,14 +83,14 @@ void iniciaGrafo(Celula** mapaGrafo, int slotsDisponiveis){
 //Identifica a posição na matriz de caracteres de todos os vértices válidos e vê se eles são âncora
 void identificaVertices(char mapaChar[linhas*2+1][colunas][4], posicao* posicoes, int slotsDiponiveis){
     int preechidos = 1; 
-    posicoes[0].linha = -1; posicoes[0].coluna = -1; 
-    posicoes[slotsDiponiveis-1].linha = -2; posicoes[slotsDiponiveis-1].coluna = -2;
+    posicoes[0].coluna = -1; posicoes[0].linha = -1; 
+    posicoes[slotsDiponiveis-1].coluna = -2; posicoes[slotsDiponiveis-1].linha = -2;
 
     for(int i = 0; i <colunas; i++){
         for(int j = 0; j<linhas*2+1; j++){
             if(strcmp(mapaChar[j][i], "***") == 1 && strcmp(mapaChar[j][i], "///") == 1){
-                    posicoes[preechidos].linha = i;
-                    posicoes[preechidos].coluna = j;
+                    posicoes[preechidos].linha = j;
+                    posicoes[preechidos].coluna = i;
                 
                 if(strcmp(mapaChar[j][i], "AAA") == 0){
                     posicoes[preechidos].eAncora = 1;
@@ -130,34 +130,34 @@ void conectaMapa(char mapaChar[linhas*2+1][colunas][4], Celula** mapaGrafo, int 
     /*O código procura se existe conexão de todos os vértices para todos os vértices, sendo i o vertice de origem e j o de destino*/
     for(int i = 0; i < slotsDisponiveis - 1; i++){ 
         for(int j = 0; j <slotsDisponiveis; j++){
-            /*Caso i seja o primeiro vértice e estejamos percorrendo a primeira coluna do mapa do presente*/
+            /*Caso i seja o primeiro vértice e estejamos percorrendo a primeira linha do mapa do presente*/
             /*Ou*/
-            /*Se existir nos disponíves um vértice cuja COLUNA que seja igual à (coluna do vertice de origem)+1 ao mesmo tempo que sua linha seja igual à linha do vertice de origem (quando fica na frente/a direita)*/
+            /*Se existir nos disponíves um vértice cuja linha que seja igual à (linha do vertice de origem)+1 ao mesmo tempo que sua coluna seja igual à coluna do vertice de origem (quando fica na frente/a direita)*/
             /*Ou*/
-            /*Se existir nos disponíves um vértice cuja coluna seja igual à (coluna do vertice de origem)+1 ao mesmo tempo que sua linha seja igual à (linha do vertice de origem) - 1 (quando fica em cima)*/
+            /*Se existir nos disponíves um vértice cuja linha seja igual à (linha do vertice de origem)+1 ao mesmo tempo que sua coluna seja igual à (coluna do vertice de origem) - 1 (quando fica em cima)*/
             /*Ou*/
-            /*Se existir nos disponíves um vértice cuja coluna seja igual à (coluna do vertice de origem)+1 ao mesmo tempo que sua linha seja igual à (linha do vertice de origem) + 1 (quando fica em baixo)*/
+            /*Se existir nos disponíves um vértice cuja linha seja igual à (linha do vertice de origem)+1 ao mesmo tempo que sua coluna seja igual à (coluna do vertice de origem) + 1 (quando fica em baixo)*/
             /*Ele define o tipo de celula, se for descanso ele ele coloca como negativo o valor que recuperamos, pra indicar uma escolher que diminiu o caminho no grafo
             Se não for descanso, vai colocar o valor que está no char usando atoi (005 -> 5)*/
-            if((i == 0 && posicoes[j].linha == 0 && posicoes[j].coluna < h/2) ||
-            (posicoes[i].linha+1 == posicoes[j].linha && posicoes[i].coluna == posicoes[j].coluna) ||
-            (posicoes[i].linha+1 == posicoes[j].linha && posicoes[i].coluna-1 == posicoes[j].coluna) ||
-            (posicoes[i].linha+1 == posicoes[j].linha && posicoes[i].coluna+1 == posicoes[j].coluna)){
+            if((i == 0 && posicoes[j].coluna == 0 && posicoes[j].linha < h/2) ||
+            (posicoes[i].coluna+1 == posicoes[j].coluna && posicoes[i].linha == posicoes[j].linha) ||
+            (posicoes[i].coluna+1 == posicoes[j].coluna && posicoes[i].linha-1 == posicoes[j].linha) ||
+            (posicoes[i].coluna+1 == posicoes[j].coluna && posicoes[i].linha+1 == posicoes[j].linha)){
                 
-                mapaGrafo[i][j].tipo = defineTipoCelula(mapaChar[posicoes[j].coluna][posicoes[j].linha]);
+                mapaGrafo[i][j].tipo = defineTipoCelula(mapaChar[posicoes[j].linha][posicoes[j].coluna]);
                 if(mapaGrafo[i][j].tipo == DESCANSO){
                     mapaGrafo[i][j].valor = -1 * D;
                 } else {
-                    mapaGrafo[i][j].valor = atoi(mapaChar[posicoes[j].coluna][posicoes[j].linha]);
+                    mapaGrafo[i][j].valor = atoi(mapaChar[posicoes[j].linha][posicoes[j].coluna]);
                 }
                 
             }
 
 
             /*Depois, ao verificar todas as conexões normais, procura pelas conexões de âncoras
-            Caso eles tenham correspondentes na mesma coluna e em uma coluna (h/2)-1 acima, e forem do tipo âncora, então vão ter uma conexão*/
+            Caso eles tenham correspondentes na mesma linha e em uma linha (h/2)-1 acima, e forem do tipo âncora, então vão ter uma conexão*/
 
-            if(posicoes[i].coluna+(h/2)+1 == posicoes[j].coluna && posicoes[i].linha == posicoes[j].linha && strcmp(mapaChar[posicoes[i].coluna][posicoes[i].linha], "AAA") == 0){
+            if(posicoes[i].linha+(h/2)+1 == posicoes[j].linha && posicoes[i].coluna == posicoes[j].coluna && strcmp(mapaChar[posicoes[i].linha][posicoes[i].coluna], "AAA") == 0){
                 mapaGrafo[i][j].valor = 0;
                 mapaGrafo[j][i].valor = 0;
             }
@@ -170,8 +170,8 @@ void conectaMapa(char mapaChar[linhas*2+1][colunas][4], Celula** mapaGrafo, int 
                 }
             }
 
-            /*Se eles estão na coluna da esquerda da matriz de mapa, eles vão ser conectados ao vértice final (o boss)*/
-            if(posicoes[i].linha == w - 1){
+            /*Se eles estão na linha da esquerda da matriz de mapa, eles vão ser conectados ao vértice final (o boss)*/
+            if(posicoes[i].coluna == w - 1){
                 mapaGrafo[i][slotsDisponiveis - 1].valor = 0; 
             }
 

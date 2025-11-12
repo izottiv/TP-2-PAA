@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "menorCaminho.h"
-#include "gerarMapa.h"
+#include "identificacaoMenorCaminho/menorCaminho.h"
+#include "geracaoMapa/gerarMapa.h"
 
 #define TAM_NOME_ARQUIVO 50
 
@@ -25,10 +25,12 @@ int main() {
         while (arquivo == NULL)
         {
             printf("Digite o nome do arquivo de entrada: ");
-            scanf("%s", nome_arquivo);
-            nome_arquivo[strcspn(nome_arquivo, "\n")] = 0;
+            scanf("%s", nome_arquivo); 
+            char nomeArquivo[50];
+            sprintf(nomeArquivo, "arquivosDeEntrada/%s", nome_arquivo);
+            nomeArquivo[strcspn(nomeArquivo, "\n")] = 0;
             
-            arquivo = fopen(nome_arquivo, "r");
+            arquivo = fopen(nomeArquivo, "r");
             if (!arquivo) {
             printf("Arquivo nao encontrado\n");
             }

@@ -4,13 +4,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include  "mapa.h"
+#include  "../manipulacaoMapa/mapa.h"
 
 void gerarMapa(){
     srand(time(NULL));
     static int contador = 1;
     char nomeArquivo[50];
-    sprintf(nomeArquivo, "ArquivoGerado%d.txt", contador);
+    sprintf(nomeArquivo, "arquivosDeEntrada/ArquivoGerado%d.txt", contador);
     contador++;
     FILE* file = fopen(nomeArquivo, "w");
     int altura, largura, forcaIncial, recuperacao, forcaNikador, inimigos, caminhos, linha, coluna, escolha, escolha2, escolha3;
@@ -19,6 +19,8 @@ void gerarMapa(){
         printf("Gostaria de gerar o arquivo escolhendo apenas a dificuldade do mapa ou gostaria de montar o mapa manualmente?\n");
         printf("1 - Dificuldades\n2 - Configuracao Total\nEscolha: ");
         scanf("%d", &escolha);
+        printf("Gostaria de adicionar tuneis?\n0 - Nao\n1 - Sim\nEscolha: ");
+        scanf("%d", &escolha3);
         if(escolha == 1){
             printf("Escolha a dificuldade:\n1 - Facil (Forca alta / Mapa pequeno)\n2 - Medio (Forca media / Mapa medio)\n3 - Dificil (Forca baixa / Mapa grande)\nEscolha: ");
             scanf("%d", &escolha2);

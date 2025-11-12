@@ -1,5 +1,5 @@
-build:	main.c menorCaminho.c mapa.c gerarMapa.c
-	gcc main.c menorCaminho.c mapa.c gerarMapa.c -o Teste
+build:	main.c manipulacaoMapa\mapa.c identificacaoMenorCaminho\menorCaminho.c geracaoMapa\gerarMapa.c
+	gcc main.c manipulacaoMapa\mapa.c identificacaoMenorCaminho\menorCaminho.c geracaoMapa\gerarMapa.c -o Teste
 
 run:
 	./Teste

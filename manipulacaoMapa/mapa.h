@@ -4,7 +4,8 @@
 #include <stdio.h>
 
 typedef char string;
-int linhas, colunas;
+extern int linhas;
+extern int colunas;
 
 #define INF 99999
 

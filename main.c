@@ -7,6 +7,8 @@
 
 #define TAM_NOME_ARQUIVO 50
 
+int linhas, colunas;
+
 int main() {
     int escolha = 0;
     while (escolha != 3) {
@@ -28,7 +30,7 @@ int main() {
         {
             printf("Digite o nome do arquivo de entrada: ");
             scanf("%s", nome_arquivo); 
-            char nomeArquivo[50];
+            char nomeArquivo[100];
             sprintf(nomeArquivo, "arquivosDeEntrada/%s", nome_arquivo);
             nomeArquivo[strcspn(nomeArquivo, "\n")] = 0;
             

@@ -58,7 +58,7 @@ int calculaSlotsDisponiveis(char mapa[linhas*2+1][colunas][4], int h, int w){
         for (int j = 0; j < w; j++) {
             if(strcmp(mapa[i][j], "///") == 0){
                 continue;
-            } else if(strcmp(mapa[i][j], "***") == 1){
+            } else if(strcmp(mapa[i][j], "***") != 0){
                 total++;
             } 
         }
@@ -88,7 +88,7 @@ void identificaVertices(char mapaChar[linhas*2+1][colunas][4], posicao* posicoes
 
     for(int i = 0; i <colunas; i++){
         for(int j = 0; j<linhas*2+1; j++){
-            if(strcmp(mapaChar[j][i], "***") == 1 && strcmp(mapaChar[j][i], "///") == 1){
+            if(strcmp(mapaChar[j][i], "***") != 0 && strcmp(mapaChar[j][i], "///") != 0){
                     posicoes[preechidos].linha = j;
                     posicoes[preechidos].coluna = i;
                 

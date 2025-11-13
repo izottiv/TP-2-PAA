@@ -9,7 +9,7 @@
 void gerarMapa(){
     srand(time(NULL));
     static int contador = 1;
-    char nomeArquivo[50];
+    char nomeArquivo[100];
     sprintf(nomeArquivo, "arquivosDeEntrada/ArquivoGerado%d.txt", contador);
     contador++;
     FILE* file = fopen(nomeArquivo, "w");
@@ -103,7 +103,7 @@ void gerarMapa(){
         if (i < quantidade) { 
             if (strcmp(mapa[linha][0], "***") == 0 && strcmp(mapa[linha][0], "AAA") != 0) {
                 int inimigos = rand() % quantidadeInimigos;  
-                char str[4];
+                char str[12];
                 sprintf(str, "%03d", inimigos);
                 strcpy(mapa[linha][0], str);
                 posicoesI[i].linha = linha; posicoesI[i].coluna = 0;
@@ -113,7 +113,7 @@ void gerarMapa(){
         } else {
             if (strcmp(mapa[linha][largura - 1], "***") == 0 && strcmp(mapa[linha][largura - 1], "AAA") != 0) {
                 int inimigos = rand() % quantidadeInimigos;  
-                char str[4];
+                char str[12];
                 sprintf(str, "%03d", inimigos);
                 strcpy(mapa[linha][largura - 1], str);
                 posicoesF[i - quantidade].linha = linha; 
@@ -129,7 +129,7 @@ void gerarMapa(){
         if (i < quantidade2) { 
             if (strcmp(mapa2[linha][0], "***") == 0 && strcmp(mapa2[linha][0], "AAA") != 0) {
                 int inimigos = rand() % quantidadeInimigos;  
-                char str[4];
+                char str[12];
                 sprintf(str, "%03d", inimigos);
                 strcpy(mapa2[linha][0], str);
                  posicoesI2[i].linha = linha; posicoesI2[i].coluna = 0;
@@ -139,7 +139,7 @@ void gerarMapa(){
         } else {
             if (strcmp(mapa2[linha][largura - 1], "***") == 0 && strcmp(mapa2[linha][largura - 1], "AAA") != 0) {
                 int inimigos = rand() % quantidadeInimigos;  
-                char str[4];
+                char str[12];
                 sprintf(str, "%03d", inimigos);
                 strcpy(mapa2[linha][largura - 1], str);
                 posicoesF2[i - quantidade2].linha = linha; 
@@ -246,7 +246,7 @@ void gerarCaminhos(int altura, int largura, char* mapa[altura][largura], int xIn
                 x++; y++;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             }
@@ -254,7 +254,7 @@ void gerarCaminhos(int altura, int largura, char* mapa[altura][largura], int xIn
                 x--; y++;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             }
@@ -262,7 +262,7 @@ void gerarCaminhos(int altura, int largura, char* mapa[altura][largura], int xIn
                 x++;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             } 
@@ -270,7 +270,7 @@ void gerarCaminhos(int altura, int largura, char* mapa[altura][largura], int xIn
                 x--;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             } 
@@ -278,7 +278,7 @@ void gerarCaminhos(int altura, int largura, char* mapa[altura][largura], int xIn
                 y++;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             } 
@@ -286,7 +286,7 @@ void gerarCaminhos(int altura, int largura, char* mapa[altura][largura], int xIn
                 y--;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             }
@@ -300,7 +300,7 @@ void gerarCaminhos2(int altura, int largura, char* mapa[altura][largura], int xI
                 x++; y++;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             }
@@ -308,7 +308,7 @@ void gerarCaminhos2(int altura, int largura, char* mapa[altura][largura], int xI
                 x--; y++;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             }
@@ -316,7 +316,7 @@ void gerarCaminhos2(int altura, int largura, char* mapa[altura][largura], int xI
                 y++;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             } 
@@ -324,7 +324,7 @@ void gerarCaminhos2(int altura, int largura, char* mapa[altura][largura], int xI
                 y--;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             }
@@ -332,7 +332,7 @@ void gerarCaminhos2(int altura, int largura, char* mapa[altura][largura], int xI
                 x++;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             } 
@@ -340,7 +340,7 @@ void gerarCaminhos2(int altura, int largura, char* mapa[altura][largura], int xI
                 x--;
                 if (strcmp(mapa[x][y], "***")==0){
                     int inimigos = rand() % quantidadeInimigos;  
-                    char str[4];
+                    char str[12];
                     sprintf(str, "%03d", inimigos);
                     strcpy(mapa[x][y], str);}
             } 

@@ -1,4 +1,5 @@
 #include "menorCaminho.h"
+#include <string.h>
 #include <time.h>
 #if _WIN32 || _WIN64
     #include <Windows.h>
@@ -123,7 +124,7 @@ void imprimirMapaInteiroColoridoPP(int h, int w, char mapa[h][w][4], posicao cam
 
 void imprimeCaminho(int escolha, int h, int w, char mapaPresente[h][w][4], char mapaPassado[h][w][4], int u, int v, int** next, Celula** total, posicao* posicoes, int F, int N) {
     if (next[u][v] == -1 ) {
-        printf("A calamidade de Nikador e inevitavel");
+        printf("A calamidade de Nikador e inevitavel\n");
         return;
     }
     posicao caminho[100];
